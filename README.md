@@ -126,18 +126,27 @@ Each module follows the same internal structure:
 Module
 
 ├── Domain
+
 ├── Application
+
 ├── Infrastructure
+
 └── Presentation
 
 Current modules:
 
 ├── Identity
+
 ├── Wallet
+
 ├── Transaction
+
 ├── Category
+
 ├── Budget
+
 ├── Report
+
 └── Notification
 
 
@@ -172,22 +181,37 @@ For a financial management system, stability, maintainability, and future evolut
 
 src
 
+
 ├── FinTrack.Api
+
 
 ├── Modules
 
+
 │ ├── Identity
+
 │ │ ├── Domain
+
 │ │ ├── Application
+
 │ │ ├── Infrastructure
+
 │ │ └── Presentation
+
 │ │
+
 │ ├── Wallet
+
 │ ├── Transaction
+
 │ ├── Category
+
 │ ├── Budget
+
 │ ├── Report
+
 │ └── Notification
+
 
 └── Shared
 
