@@ -3,7 +3,6 @@
     <Project Path="FinTracker.Api/FinTracker.Api.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/" />
-  <Folder Name="/Src/Modules/Audit/" />
   <Folder Name="/Src/Modules/Budget/" />
   <Folder Name="/Src/Modules/Category/" />
   <Folder Name="/Src/Modules/Identity/">
