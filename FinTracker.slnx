@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/Src/">
+    <Project Path="FinTracker.Api/FinTracker.Api.csproj" />
+  </Folder>
+  <Folder Name="/Src/Modules/" />
+  <Folder Name="/Src/Modules/Audit/" />
+  <Folder Name="/Src/Modules/Budget/" />
+  <Folder Name="/Src/Modules/Category/" />
+  <Folder Name="/Src/Modules/Identity/">
+    <Project Path="Src/Modules/Identity/Identity.Application/Identity.Application.csproj" />
+    <Project Path="Src/Modules/Identity/Identity.Domain/Identity.Domain.csproj" />
+    <Project Path="Src/Modules/Identity/Identity.Infrastructure/Identity.Infrastructure.csproj" />
+    <Project Path="Src/Modules/Identity/Identity.Presentation/Identity.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Src/Modules/Notification/" />
+  <Folder Name="/Src/Modules/Report/" />
+  <Folder Name="/Src/Modules/Transaction/" />
+  <Folder Name="/Src/Modules/Wallet/" />
+  <Folder Name="/Src/Shared/">
+    <Project Path="Src/Shared/FinTracker.SharedKernel/FinTracker.SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/test/" />
+</Solution>
