@@ -1,22 +1,59 @@
 <Solution>
+  <Folder Name="/docs/" />
+  <Folder Name="/docs/adr/">
+    <File Path="docs/adr/ADR-001-Why-Modular-Monolith.md" />
+    <File Path="docs/adr/ADR-002-Module-Boundaries.md" />
+  </Folder>
+  <Folder Name="/docs/architecture/" />
+  <Folder Name="/docs/diagrams/" />
   <Folder Name="/Src/">
-    <Project Path="FinTracker.Api/FinTracker.Api.csproj" />
+    <Project Path="Src/FinTracker.Api/FinTracker.Api.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/" />
-  <Folder Name="/Src/Modules/Budget/" />
-  <Folder Name="/Src/Modules/Category/" />
+  <Folder Name="/Src/Modules/Budget/">
+    <Project Path="Src/Modules/Budget/Budget.Application/Budget.Application.csproj" />
+    <Project Path="Src/Modules/Budget/Budget.Domain/Budget.Domain.csproj" />
+    <Project Path="Src/Modules/Budget/Budget.Infrastructure/Budget.Infrastructure.csproj" />
+    <Project Path="Src/Modules/Budget/Budget.Presentation/Budget.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Src/Modules/Category/">
+    <Project Path="Src/Modules/Category/Category.Application/Category.Application.csproj" />
+    <Project Path="Src/Modules/Category/Category.Domain/Category.Domain.csproj" />
+    <Project Path="Src/Modules/Category/Category.Infrastructure/Category.Infrastructure.csproj" />
+    <Project Path="Src/Modules/Category/Category.Presentation/Category.Presentation.csproj" />
+  </Folder>
   <Folder Name="/Src/Modules/Identity/">
     <Project Path="Src/Modules/Identity/Identity.Application/Identity.Application.csproj" />
     <Project Path="Src/Modules/Identity/Identity.Domain/Identity.Domain.csproj" />
     <Project Path="Src/Modules/Identity/Identity.Infrastructure/Identity.Infrastructure.csproj" />
     <Project Path="Src/Modules/Identity/Identity.Presentation/Identity.Presentation.csproj" />
   </Folder>
-  <Folder Name="/Src/Modules/Notification/" />
-  <Folder Name="/Src/Modules/Report/" />
-  <Folder Name="/Src/Modules/Transaction/" />
-  <Folder Name="/Src/Modules/Wallet/" />
+  <Folder Name="/Src/Modules/Notification/">
+    <Project Path="Src/Modules/Notification/Notification.Application/Notification.Application.csproj" />
+    <Project Path="Src/Modules/Notification/Notification.Domain/Notification.Domain.csproj" />
+    <Project Path="Src/Modules/Notification/Notification.Infrastructure/Notification.Infrastructure.csproj" />
+    <Project Path="Src/Modules/Notification/Notification.Presentation/Notification.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Src/Modules/Report/">
+    <Project Path="Src/Modules/Report/Report.Application/Report.Application.csproj" />
+    <Project Path="Src/Modules/Report/Report.Domain/Report.Domain.csproj" />
+    <Project Path="Src/Modules/Report/Report.Infrastructure/Report.Infrastructure.csproj" />
+    <Project Path="Src/Modules/Report/Report.Presentation/Report.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Src/Modules/Transaction/">
+    <Project Path="Src/Modules/Transaction/Transaction.Application/Transaction.Application.csproj" />
+    <Project Path="Src/Modules/Transaction/Transaction.Domain/Transaction.Domain.csproj" />
+    <Project Path="Src/Modules/Transaction/Transaction.Infrastructure/Transaction.Infrastructure.csproj" />
+    <Project Path="Src/Modules/Transaction/Transaction.Presentation/Transaction.Presentation.csproj" />
+  </Folder>
+  <Folder Name="/Src/Modules/Wallet/">
+    <Project Path="Src/Modules/Wallet/Wallet.Application/Wallet.Application.csproj" />
+    <Project Path="Src/Modules/Wallet/Wallet.Domain/Wallet.Domain.csproj" />
+    <Project Path="Src/Modules/Wallet/Wallet.Infrastructure/Wallet.Infrastructure.csproj" />
+    <Project Path="Src/Modules/Wallet/Wallet.Presentation/Wallet.Presentation.csproj" />
+  </Folder>
   <Folder Name="/Src/Shared/">
     <Project Path="Src/Shared/FinTracker.SharedKernel/FinTracker.SharedKernel.csproj" />
   </Folder>
-  <Folder Name="/test/" />
+  <Folder Name="/tests/" />
 </Solution>
