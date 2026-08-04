@@ -1,4 +1,4 @@
-﻿namespace FinTracker.SharedKernel
+﻿namespace Transaction.Domain
 {
     public class Class1
     {
