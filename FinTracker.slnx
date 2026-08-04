@@ -4,7 +4,10 @@
     <File Path="docs/adr/ADR-001-Why-Modular-Monolith.md" />
     <File Path="docs/adr/ADR-002-Module-Boundaries.md" />
   </Folder>
-  <Folder Name="/docs/architecture/" />
+  <Folder Name="/docs/architecture/">
+    <File Path="docs/architecture/module-dependencies.md" />
+    <File Path="docs/architecture/shared-kernel.md" />
+  </Folder>
   <Folder Name="/docs/diagrams/" />
   <Folder Name="/Src/">
     <Project Path="Src/FinTracker.Api/FinTracker.Api.csproj" />
