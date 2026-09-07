@@ -29,5 +29,10 @@ namespace Identity.Domain.Repositories
         Task UpdateAsync(
             User user,
             CancellationToken cancellationToken = default);
+
+        Task<bool> IsEmailUniqueAsync(
+            string email, CancellationToken cancellationToken = default);
+        Task<bool> IsPhoneNumberUniqueAsync(
+            string phoneNumber, CancellationToken cancellationToken = default);
     }
 }

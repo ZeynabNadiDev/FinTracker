@@ -27,6 +27,7 @@
   </Folder>
   <Folder Name="/Src/Modules/Identity/">
     <Project Path="Src/Modules/Identity/Identity.Application/Identity.Application.csproj" />
+    <Project Path="Src/Modules/Identity/Identity.Composition/Identity.Composition.csproj" Id="c9781662-4385-4bf8-8ff5-8fa669602a6d" />
     <Project Path="Src/Modules/Identity/Identity.Domain/Identity.Domain.csproj" />
     <Project Path="Src/Modules/Identity/Identity.Infrastructure/Identity.Infrastructure.csproj" />
     <Project Path="Src/Modules/Identity/Identity.Presentation/Identity.Presentation.csproj" />
