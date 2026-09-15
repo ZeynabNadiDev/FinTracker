@@ -161,6 +161,7 @@ To ensure the system remains maintainable and scalable as it grows:
 *   **Database Isolation:** Each module owns its database schema, strictly enforced through Entity Framework Core configurations to prevent cross-module table access.
 *   **Quality Assurance:** The project follows a test-driven mindset, focusing on unit testing the Domain layer and implementing integration tests for the Application layer logic.
 
+---
 
 # .NET Version Decision
 
