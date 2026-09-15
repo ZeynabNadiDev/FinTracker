@@ -63,13 +63,14 @@ namespace Identity.Application.Commands.Register.Handler
             var passwordHash = _passwordHasher.Hash(request.Password);
 
             // 5. Create the User Aggregate Root
-            var user = new User(
+            var user = User.Create(
                 Guid.NewGuid(),
                 email,
                 request.PhoneNumber,
                 request.FirstName,
                 request.LastName,
                 passwordHash);
+
 
             // 6. Persist changes into the database
             await _userRepository.AddAsync(user, cancellationToken);

@@ -13,6 +13,6 @@ namespace Identity.Domain.Entities.User.Events
             : base(user.Id, user.Version)
         {
         }
-    {
+  
     }
 }

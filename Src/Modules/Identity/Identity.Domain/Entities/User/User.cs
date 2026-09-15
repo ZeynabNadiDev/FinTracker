@@ -17,30 +17,45 @@ public class User : AggregateRoot<Guid>
     public DateTime? UpdatedAt { get; private set; }
     public DateTime? LastLogin { get; private set; }
 
-    public User(
+    protected User() : base(Guid.Empty)
+    {
+    }
+
+    private User(
+        Guid id,
+        Email email,
+        string phoneNumber,
+        string firstName,
+        string lastName,
+        string passwordHash) : base(id)
+    {
+        Email = email;
+        PhoneNumber = phoneNumber.Trim();
+        FirstName = firstName.Trim();
+        LastName = lastName.Trim();
+        PasswordHash = passwordHash;
+        IsRemoved = false;
+        CreatedAt = DateTime.UtcNow;
+    }
+
+    public static User Create(
         Guid id,
         Email email,
         string phoneNumber,
         string firstName,
         string lastName,
         string passwordHash)
-        : base(id)
     {
         EnsureNotEmpty(phoneNumber, nameof(phoneNumber));
         EnsureNotEmpty(firstName, nameof(firstName));
         EnsureNotEmpty(lastName, nameof(lastName));
         EnsureNotEmpty(passwordHash, nameof(passwordHash));
 
-        Email = email;
-        PhoneNumber = phoneNumber.Trim();
-        FirstName = firstName.Trim();
-        LastName = lastName.Trim();
-        PasswordHash = passwordHash;
+        var user = new User(id, email, phoneNumber, firstName, lastName, passwordHash);
 
-        IsRemoved = false;
-        CreatedAt = DateTime.UtcNow;
+        user.AddDomainEvent(new UserCreated(user));
 
-        AddDomainEvent(new UserCreated(this));
+        return user;
     }
 
     public long Update(

@@ -12,6 +12,7 @@ namespace Identity.Domain.ValueObject
     {
         public string Value { get; }
 
+        private Email() { }
         public Email(string value)
         {
             if(string.IsNullOrWhiteSpace(value))
