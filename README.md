@@ -154,6 +154,14 @@ Each module is responsible for its own business rules and communicates with othe
 
 ---
 
+### Design Standards
+To ensure the system remains maintainable and scalable as it grows:
+
+*   **Module Communication:** Modules are loosely coupled. They communicate via shared contracts (Shared Kernel) and integration events, avoiding direct dependency between domains.
+*   **Database Isolation:** Each module owns its database schema, strictly enforced through Entity Framework Core configurations to prevent cross-module table access.
+*   **Quality Assurance:** The project follows a test-driven mindset, focusing on unit testing the Domain layer and implementing integration tests for the Application layer logic.
+
+
 # .NET Version Decision
 
 ## Why .NET 8?
