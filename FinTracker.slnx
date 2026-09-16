@@ -49,6 +49,7 @@
   </Folder>
   <Folder Name="/Src/Modules/Wallet/">
     <Project Path="Src/Modules/Wallet/Wallet.Application/Wallet.Application.csproj" />
+    <Project Path="Src/Modules/Wallet/Wallet.Composition/Wallet.Composition.csproj" Id="3f734459-743f-4f91-a09d-23f18d55c522" />
     <Project Path="Src/Modules/Wallet/Wallet.Domain/Wallet.Domain.csproj" />
     <Project Path="Src/Modules/Wallet/Wallet.Infrastructure/Wallet.Infrastructure.csproj" />
     <Project Path="Src/Modules/Wallet/Wallet.Presentation/Wallet.Presentation.csproj" />
