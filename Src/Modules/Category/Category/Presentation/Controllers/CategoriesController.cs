@@ -1,16 +1,18 @@
 ﻿using Category.Application.Commands.CreateCategory;
-using Category.Application.Commands.CreateCategory.Handler;
 using Category.Application.Commands.DeleteCategory;
 using Category.Application.Commands.UpdateCategory;
-using Category.Application.Commands.UpdateCategory.Handler;
 using Category.Application.Queries.GetCategoriesByUser;
-using Category.Application.Queries.GetCategoriesByUser.Handler;
+using Category.Domain.Entities.Category;
+using Category.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Security.Claims;
 
 namespace Category.Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class CategoriesController : ControllerBase
@@ -24,72 +26,89 @@ public class CategoriesController : ControllerBase
 
     [HttpPost]
     [SwaggerOperation(
-      Summary = "Create a new category",
-      Description = "Creates a new income or expense category for the specified user.")]
-    public async Task<IActionResult> Create([FromBody] CreateCategoryCommand command)
+        Summary = "Create a new category",
+        Description = "Creates a new category for the currently authenticated user.")]
+    public async Task<IActionResult> Create([FromBody] CreateCategoryRequest request)
     {
+        var userId = GetCurrentUserId();
+        if (userId is null)
+            return Unauthorized();
+
+        var command = new CreateCategoryCommand(
+            request.Name,
+            request.Description,
+            userId.Value,
+            request.Type
+        );
+
         var result = await _mediator.Send(command);
 
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value);
-        }
-
-        return BadRequest(result.Error);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
 
     [HttpGet]
     [SwaggerOperation(
-         Summary = "Get categories by user",
-         Description = "Retrieves all categories associated with a specific user ID.")]
-    public async Task<IActionResult> GetByUser([FromQuery] Guid userId)
+        Summary = "Get categories of current user",
+        Description = "Retrieves all categories associated with the currently authenticated user.")]
+    public async Task<IActionResult> GetByUser()
     {
-        var query = new GetCategoriesByUserQuery(userId);
+        var userId = GetCurrentUserId();
+        if (userId is null)
+            return Unauthorized();
+
+        var query = new GetCategoriesByUserQuery(userId.Value);
         var result = await _mediator.Send(query);
 
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value);
-        }
-
-        return BadRequest(result.Error);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
 
     [HttpPut("{id:int}")]
     [SwaggerOperation(
-         Summary = "Update category",
-         Description = "Updates the details of an existing category by ID.")]
-    public async Task<IActionResult> Update(int id, [FromBody] UpdateCategoryCommand command)
+        Summary = "Update category",
+        Description = "Updates an existing category belonging to the currently authenticated user.")]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateCategoryRequest request)
     {
-        if (id != command.CategoryId)
-        {
-            return BadRequest("Category ID mismatch between URL and body.");
-        }
+        var userId = GetCurrentUserId();
+        if (userId is null)
+            return Unauthorized();
+
+        var command = new UpdateCategoryCommand(
+            id,
+            userId.Value,
+            request.Name,
+            request.Description,
+            request.Type
+        );
 
         var result = await _mediator.Send(command);
 
-        if (result.IsSuccess)
-        {
-            return Ok(result.Value);
-        }
-
-        return BadRequest(result.Error);
+        return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
     }
 
     [HttpDelete("{id:int}")]
     [SwaggerOperation(
-       Summary = "Delete category",
-       Description = "Deletes a category from the system.")]
-    public async Task<IActionResult> Delete(int id, [FromQuery] Guid userId)
+        Summary = "Delete category",
+        Description = "Deletes a category belonging to the currently authenticated user.")]
+    public async Task<IActionResult> Delete(int id)
     {
-        var command = new DeleteCategoryCommand(id, userId);
+        var userId = GetCurrentUserId();
+        if (userId is null)
+            return Unauthorized();
+
+        var command = new DeleteCategoryCommand(id, userId.Value);
         var result = await _mediator.Send(command);
 
-        if (result.IsSuccess)
-        {
-            return NoContent();
-        }
+        return result.IsSuccess ? NoContent() : BadRequest(result.Error);
+    }
 
-        return BadRequest(result.Error);
+    private Guid? GetCurrentUserId()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                       ?? User.FindFirst("sub")?.Value;
+
+        return Guid.TryParse(userIdClaim, out var userId) ? userId : null;
     }
 }
+
+public sealed record CreateCategoryRequest(string Name, string? Description, CategoryType Type);
+public sealed record UpdateCategoryRequest(string Name, string? Description, CategoryType Type);
