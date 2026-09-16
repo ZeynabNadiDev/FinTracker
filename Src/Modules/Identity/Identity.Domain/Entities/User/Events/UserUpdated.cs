@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Identity.Domain.Entities.User.Events
 {
-    public sealed record UserUpdated:DomainEvent
+    public sealed record UserUpdated:DomainEvent<Guid>
     {
         public UserUpdated(User user)
           : base(user.Id, user.Version)

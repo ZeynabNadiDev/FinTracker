@@ -20,10 +20,7 @@
     <Project Path="Src/Modules/Budget/Budget.Presentation/Budget.Presentation.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/Category/">
-    <Project Path="Src/Modules/Category/Category.Application/Category.Application.csproj" />
-    <Project Path="Src/Modules/Category/Category.Domain/Category.Domain.csproj" />
-    <Project Path="Src/Modules/Category/Category.Infrastructure/Category.Infrastructure.csproj" />
-    <Project Path="Src/Modules/Category/Category.Presentation/Category.Presentation.csproj" />
+    <Project Path="Src/Modules/Category/Category/Category.csproj" Id="900ad30a-a5c6-4f81-b8d2-a8af4ed63a27" />
   </Folder>
   <Folder Name="/Src/Modules/Identity/">
     <Project Path="Src/Modules/Identity/Identity.Application/Identity.Application.csproj" />

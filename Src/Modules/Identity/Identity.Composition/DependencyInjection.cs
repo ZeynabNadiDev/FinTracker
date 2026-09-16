@@ -1,4 +1,5 @@
-﻿using Identity.Application;
+﻿using FluentValidation;
+using Identity.Application;
 using Identity.Application.Commands.Register.Handler;
 using Identity.Application.Common;
 using Identity.Application.Interfaces;
@@ -35,6 +36,9 @@ namespace Identity.Composition
             // Application
             services.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(typeof(RegisterCommandHandler).Assembly));
+
+            
+            services.AddValidatorsFromAssembly(typeof(RegisterCommandHandler).Assembly);
 
             return services;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Identity.Domain.Entities.User.Events
 {
-    public sealed record UserDeleted: DomainEvent
+    public sealed record UserDeleted: DomainEvent<Guid>
     {
         public UserDeleted(User user)
             : base(user.Id, user.Version)

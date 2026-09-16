@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Identity.Domain.Entities.User.Events
 {
-    public sealed record UserPasswordChanged : DomainEvent
+    public sealed record UserPasswordChanged : DomainEvent<Guid>
     {
         public UserPasswordChanged(User user)
                : base(user.Id, user.Version)

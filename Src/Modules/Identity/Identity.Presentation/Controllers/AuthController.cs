@@ -2,6 +2,7 @@
 using Identity.Application.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,9 @@ namespace Identity.Presentation.Controllers
         }
 
         [HttpPost("register")]
+        [SwaggerOperation(
+        Summary = "Register a new user",
+        Description = "Registers a new user account with email, phone number, and password.")]
         public async Task<IActionResult> Register([FromBody] RegisterCommand command, CancellationToken cancellationToken)
         {
             var result = await _sender.Send(command, cancellationToken);
@@ -30,6 +34,9 @@ namespace Identity.Presentation.Controllers
         }
 
         [HttpPost("login")]
+        [SwaggerOperation(
+         Summary = "User login",
+         Description = "Authenticates user credentials and returns a JWT access token.")]
         public async Task<IActionResult> Login([FromBody] LoginCommand command, CancellationToken cancellationToken)
         {
             var result = await _sender.Send(command, cancellationToken);

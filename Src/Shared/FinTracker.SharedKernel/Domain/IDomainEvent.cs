@@ -8,10 +8,13 @@ namespace FinTracker.SharedKernel.Domain
 {
     public interface IDomainEvent
     {
-        Guid AggregateId { get; }
-
         long AggregateVersion { get; }
 
         DateTime OccurredOn { get; }
+    }
+
+    public interface IDomainEvent<out TId> : IDomainEvent
+    {
+        TId AggregateId { get; }
     }
 }

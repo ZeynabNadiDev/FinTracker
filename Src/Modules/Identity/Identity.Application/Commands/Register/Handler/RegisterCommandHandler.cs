@@ -83,7 +83,7 @@ namespace Identity.Application.Commands.Register.Handler
                 FullName: $"{user.FirstName} {user.LastName}"
             );
 
-            return Result<RegisterResponseDto>.Succcess(response);
+            return Result<RegisterResponseDto>.Success(response);
         }
     }
 }

@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FinTracker.SharedKernel.Domain
 {
-    public abstract record DomainEvent:IDomainEvent
+    public abstract record DomainEvent<TId>:IDomainEvent<TId>
     {
-        public Guid AggregateId { get; }
+        public TId AggregateId { get; }
         public long AggregateVersion { get; }
         public DateTime OccurredOn { get; }
 
-        protected DomainEvent(Guid aggregateId, long aggregateVersion)
+        protected DomainEvent(TId aggregateId, long aggregateVersion)
         {
             AggregateId = aggregateId;
             AggregateVersion = aggregateVersion;
