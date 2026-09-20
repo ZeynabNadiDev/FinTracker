@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Modules\Identity\Identity.Composition\Identity.Composition.csproj" />
     <ProjectReference Include="..\Modules\Identity\Identity.Presentation\Identity.Presentation.csproj" />
     <ProjectReference Include="..\Modules\Wallet\Wallet.Composition\Wallet.Composition.csproj" />
+    <ProjectReference Include="..\Modules\Wallet\Wallet.Presentation\Wallet.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

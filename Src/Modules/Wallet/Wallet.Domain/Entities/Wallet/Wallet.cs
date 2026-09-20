@@ -1,14 +1,15 @@
 ﻿using FinTracker.SharedKernel.Domain;
 using FinTracker.SharedKernel.Exceptions;
-using System;
+using FinTracker.SharedKernel.ValueObjects;
 using Wallet.Domain.Entities.Wallet.Events;
 
-namespace Wallet.Domain.Entities.Wallet;
+namespace Wallet.Domain.Entities.Wallet 
+{ 
 
 public class Wallet : AggregateRoot<Guid>
 {
     public string Title { get; private set; } = null!;
-    public decimal Balance { get; private set; }
+    public Money Balance { get; private set; } = null!;
     public Guid UserId { get; private set; }
     public bool IsRemoved { get; private set; }
     public DateTime CreatedAt { get; private set; }
@@ -16,20 +17,20 @@ public class Wallet : AggregateRoot<Guid>
 
     protected Wallet() : base(Guid.Empty) { }
 
-    private Wallet(Guid id, string title, Guid userId) : base(id)
+    private Wallet(Guid id, string title, Guid userId, string currency) : base(id)
     {
         EnsureNotEmpty(title, nameof(title));
         Title = title.Trim();
         UserId = userId;
-        Balance = 0;
+        Balance = new Money(0, currency); // Initial balance is zero with selected currency
         IsRemoved = false;
         CreatedAt = DateTime.UtcNow;
     }
 
-    public static Wallet Create(Guid id, string title, Guid userId)
+    public static Wallet Create(Guid id, string title, Guid userId, string currency = "IRT")
     {
-        var wallet = new Wallet(id, title, userId);
-        wallet.AddDomainEvent(new WalletCreated(wallet)); 
+        var wallet = new Wallet(id, title, userId, currency);
+        wallet.AddDomainEvent(new WalletCreated(wallet));
         return wallet;
     }
 
@@ -52,7 +53,7 @@ public class Wallet : AggregateRoot<Guid>
         IsRemoved = true;
         UpdatedAt = DateTime.UtcNow;
 
-        AddDomainEvent(new WalletDeleted(this)); 
+        AddDomainEvent(new WalletDeleted(this));
         return Version;
     }
 
@@ -61,4 +62,5 @@ public class Wallet : AggregateRoot<Guid>
         if (string.IsNullOrWhiteSpace(value))
             throw new DomainException($"{fieldName} cannot be null or empty.");
     }
+  }
 }

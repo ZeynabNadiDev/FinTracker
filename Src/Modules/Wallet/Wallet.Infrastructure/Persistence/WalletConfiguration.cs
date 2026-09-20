@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
 namespace Wallet.Infrastructure.Persistence
 {
     public class WalletConfiguration : IEntityTypeConfiguration<Wallet.Domain.Entities.Wallet.Wallet>
@@ -19,10 +18,19 @@ namespace Wallet.Infrastructure.Persistence
                 .HasMaxLength(100)
                 .IsRequired();
 
-            // Balance
-            builder.Property(w => w.Balance)
-                .HasPrecision(18, 2)
-                .IsRequired();
+            // Money Value Object Mapping (Balance & Currency)
+            builder.OwnsOne(w => w.Balance, money =>
+            {
+                money.Property(m => m.Amount)
+                    .HasColumnName("Balance")
+                    .HasPrecision(18, 2)
+                    .IsRequired();
+
+                money.Property(m => m.Currency)
+                    .HasColumnName("Currency")
+                    .HasMaxLength(10)
+                    .IsRequired();
+            });
 
             // UserId
             builder.Property(w => w.UserId)

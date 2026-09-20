@@ -34,7 +34,10 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Identity.Presentation.ModuleReference).Assembly)
-    .AddApplicationPart(typeof(Category.Presentation.ModuleReference).Assembly);
+    .AddApplicationPart(typeof(Category.Presentation.ModuleReference).Assembly)
+    .AddApplicationPart(typeof(Wallet.Presentation.ModuleReference).Assembly);
+   
+
 
 builder.Services.AddEndpointsApiExplorer();
 

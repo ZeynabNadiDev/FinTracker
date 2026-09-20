@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wallet.Infrastructure.Persistence.DBcontext;
 
 #nullable disable
 
-namespace Wallet.Infrastructure.Migrations
+namespace Wallet.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(WalletDbContext))]
-    partial class WalletDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260918164751_Add_Money_ValueObject_To_Wallet")]
+    partial class Add_Money_ValueObject_To_Wallet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,10 +30,6 @@ namespace Wallet.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Balance")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -55,6 +54,36 @@ namespace Wallet.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Wallets", "wallet");
+                });
+
+            modelBuilder.Entity("Wallet.Domain.Entities.Wallet.Wallet", b =>
+                {
+                    b.OwnsOne("FinTracker.SharedKernel.ValueObjects.Money", "Balance", b1 =>
+                        {
+                            b1.Property<Guid>("WalletId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<decimal>("Amount")
+                                .HasPrecision(18, 2)
+                                .HasColumnType("decimal(18,2)")
+                                .HasColumnName("Balance");
+
+                            b1.Property<string>("Currency")
+                                .IsRequired()
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("Currency");
+
+                            b1.HasKey("WalletId");
+
+                            b1.ToTable("Wallets", "wallet");
+
+                            b1.WithOwner()
+                                .HasForeignKey("WalletId");
+                        });
+
+                    b.Navigation("Balance")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
