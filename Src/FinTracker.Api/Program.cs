@@ -1,6 +1,7 @@
 using Category.Composition;
 using Identity.Composition;
 using Wallet.Composition;
+using Transaction.Composition;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
@@ -11,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddIdentityModule(builder.Configuration);
 builder.Services.AddCategoryModule(builder.Configuration);
 builder.Services.AddWalletModule(builder.Configuration);
+builder.Services.AddTransactionModule(builder.Configuration);
 
 builder.Services.AddAuthentication(options =>
 {

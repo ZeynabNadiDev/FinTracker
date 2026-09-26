@@ -57,5 +57,6 @@ namespace Wallet.Infrastructure.Persistence.Repositories
         {
             _context.Wallets.Remove(wallet);
         }
+
     }
 }

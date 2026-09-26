@@ -62,5 +62,33 @@ public class Wallet : AggregateRoot<Guid>
         if (string.IsNullOrWhiteSpace(value))
             throw new DomainException($"{fieldName} cannot be null or empty.");
     }
-  }
+
+        public void Deposit(decimal amount)
+        {
+            if (IsRemoved)
+                throw new DomainException("Cannot deposit to a removed wallet.");
+
+            if (amount <= 0)
+                throw new DomainException("Deposit amount must be greater than zero.");
+
+            Balance = new Money(Balance.Amount + amount, Balance.Currency);
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void Withdraw(decimal amount)
+        {
+            if (IsRemoved)
+                throw new DomainException("Cannot withdraw from a removed wallet.");
+
+            if (amount <= 0)
+                throw new DomainException("Withdraw amount must be greater than zero.");
+
+            if (Balance.Amount < amount)
+                throw new DomainException("Insufficient wallet balance.");
+
+            Balance = new Money(Balance.Amount - amount, Balance.Currency);
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+    }
 }

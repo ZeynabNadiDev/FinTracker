@@ -43,6 +43,7 @@
   </Folder>
   <Folder Name="/Src/Modules/Transaction/">
     <Project Path="Src/Modules/Transaction/Transaction.Application/Transaction.Application.csproj" />
+    <Project Path="Src/Modules/Transaction/Transaction.Composition/Transaction.Composition.csproj" Id="f74fb9eb-d8de-401e-ab95-238de1e27cf7" />
     <Project Path="Src/Modules/Transaction/Transaction.Domain/Transaction.Domain.csproj" />
     <Project Path="Src/Modules/Transaction/Transaction.Infrastructure/Transaction.Infrastructure.csproj" />
     <Project Path="Src/Modules/Transaction/Transaction.Presentation/Transaction.Presentation.csproj" />

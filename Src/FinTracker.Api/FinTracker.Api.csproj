@@ -19,6 +19,8 @@
     <ProjectReference Include="..\Modules\Category\Category\Category.csproj" />
     <ProjectReference Include="..\Modules\Identity\Identity.Composition\Identity.Composition.csproj" />
     <ProjectReference Include="..\Modules\Identity\Identity.Presentation\Identity.Presentation.csproj" />
+    <ProjectReference Include="..\Modules\Transaction\Transaction.Composition\Transaction.Composition.csproj" />
+    <ProjectReference Include="..\Modules\Transaction\Transaction.Presentation\Transaction.Presentation.csproj" />
     <ProjectReference Include="..\Modules\Wallet\Wallet.Composition\Wallet.Composition.csproj" />
     <ProjectReference Include="..\Modules\Wallet\Wallet.Presentation\Wallet.Presentation.csproj" />
   </ItemGroup>

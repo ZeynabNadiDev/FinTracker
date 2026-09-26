@@ -36,9 +36,10 @@ public static class DependencyInjection
         {
             cfg.RegisterServicesFromAssembly(typeof(Wallet.Application.Commands.CreateWallet.CreateWalletCommand).Assembly);
         });
-
-        // 4. FluentValidation Validators for Wallet Application
-        services.AddValidatorsFromAssembly(typeof(Wallet.Application.Commands.CreateWallet.CreateWalletCommand).Assembly);
+            services.AddMediatR(cfg =>
+                cfg.RegisterServicesFromAssembly(typeof(Wallet.Application.EventHandlers.TransactionCreatedEventHandler).Assembly));
+            // 4. FluentValidation Validators for Wallet Application
+            services.AddValidatorsFromAssembly(typeof(Wallet.Application.Commands.CreateWallet.CreateWalletCommand).Assembly);
 
         return services;
     }
