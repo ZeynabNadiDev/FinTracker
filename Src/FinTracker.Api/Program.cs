@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using System.Text;
+using Budget.Composition;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddIdentityModule(builder.Configuration);
 builder.Services.AddCategoryModule(builder.Configuration);
 builder.Services.AddWalletModule(builder.Configuration);
 builder.Services.AddTransactionModule(builder.Configuration);
+builder.Services.AddBudgetModule(builder.Configuration);
 
 builder.Services.AddAuthentication(options =>
 {
@@ -37,8 +39,10 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Identity.Presentation.ModuleReference).Assembly)
     .AddApplicationPart(typeof(Category.Presentation.ModuleReference).Assembly)
-    .AddApplicationPart(typeof(Wallet.Presentation.ModuleReference).Assembly);
-   
+    .AddApplicationPart(typeof(Wallet.Presentation.ModuleReference).Assembly)
+    .AddApplicationPart(typeof(Transaction.Presentation.Controller.TransactionsController).Assembly) 
+    .AddApplicationPart(typeof(Budget.Presentation.Controllers.BudgetsController).Assembly);
+
 
 
 builder.Services.AddEndpointsApiExplorer();
