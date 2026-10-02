@@ -3,7 +3,9 @@ using Category.Domain.Repository;
 using Category.Domain.Uow;
 using Category.Infrastructure.Persistence.DBcontext;
 using Category.Infrastructure.Persistence.Repository;
+using Category.Infrastructure.Persistence.Services;
 using Category.Infrastructure.Persistence.Uow;
+using FinTracker.SharedKernel.Contracts;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +30,7 @@ namespace Category.Composition
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICategoryContract, CategoryContractService>();
 
             // 2. Application (MediatR & Validation)
             services.AddMediatR(cfg =>

@@ -8,7 +8,5 @@ namespace Transaction.Application.DTOs
      int CategoryId,
      decimal Amount,
      TransactionType Type,
-     string? Description,
-     DateTime TransactionDate
- );
+     string? Description);
 }

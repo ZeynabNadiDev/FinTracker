@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using FinTracker.SharedKernel.Contracts;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,7 @@ using Transaction.Domain.Repositories;
 using Transaction.Domain.UOW;
 using Transaction.Infrastructure.Persistence.DBcontext;
 using Transaction.Infrastructure.Persistence.Repositories;
+using Transaction.Infrastructure.Persistence.Services;
 using Transaction.Infrastructure.Persistence.Uow;
 
 namespace Transaction.Composition
@@ -30,7 +32,7 @@ namespace Transaction.Composition
 
             // Registering UnitOfWork: Assuming TransactionDbContext implements IUnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddScoped<ITransactionContract, TransactionContract>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             return services;

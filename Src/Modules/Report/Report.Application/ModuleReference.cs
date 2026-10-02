@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Category.Domain.Enums
+namespace Report.Presentation
 {
-    public enum CategoryType
+    public class ModuleReference
     {
-        Income = 1,
-        Expense = 2
     }
 }

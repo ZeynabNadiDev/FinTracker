@@ -3,7 +3,9 @@ using Budget.Domain.Repositories;
 using Budget.Domain.UOW;
 using Budget.Infrastructure.Persistence.DBcontext;
 using Budget.Infrastructure.Persistence.Repositories;
+using Budget.Infrastructure.Persistence.Services;
 using Budget.Infrastructure.Persistence.Uow;
+using FinTracker.SharedKernel.Contracts;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +29,7 @@ namespace Budget.Composition
             // Repositories & Unit of Work
             services.AddScoped<IBudgetRepository, BudgetRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddScoped<IBudgetReadService, BudgetReadService>();
             // Application Layer (MediatR & Validators)
             services.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(typeof(CreateBudgetCommand).Assembly));

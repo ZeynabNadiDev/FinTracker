@@ -11,6 +11,5 @@ namespace Transaction.Application.DTOs
          int CategoryId,
          decimal Amount,
          int Type,
-         string? Description,
-         DateTime TransactionDate);
+         string? Description);
 }

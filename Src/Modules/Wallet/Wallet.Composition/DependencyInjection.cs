@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using FinTracker.SharedKernel.Contracts;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ using Wallet.Domain.Repository;
 using Wallet.Domain.UOW;
 using Wallet.Infrastructure.Persistence.DBcontext;
 using Wallet.Infrastructure.Persistence.Repositories;
+using Wallet.Infrastructure.Persistence.Services;
 using Wallet.Infrastructure.Persistence.UOW;
 
 namespace Wallet.Composition
@@ -22,9 +24,10 @@ public static class DependencyInjection
         // 1. Repositories and UnitOfWork
         services.AddScoped<IWalletRepository, WalletRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IWalletContract, WalletContractService>();
 
-        // 2. DbContext Configuration
-        var connectionString = configuration.GetConnectionString("FinTrackerDb")
+            // 2. DbContext Configuration
+            var connectionString = configuration.GetConnectionString("FinTrackerDb")
             ?? configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("Connection string 'FinTrackerDb' or 'DefaultConnection' was not found.");
 

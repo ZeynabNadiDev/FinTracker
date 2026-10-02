@@ -32,11 +32,7 @@ namespace Transaction.Application.Commands.CreateTransaction
                 .WithMessage("Description cannot exceed 500 characters.")
                 .When(x => !string.IsNullOrEmpty(x.Description));
 
-            RuleFor(x => x.TransactionDate)
-                .NotEmpty()
-                .WithMessage("Transaction date is required.")
-                .LessThanOrEqualTo(DateTime.UtcNow.AddMinutes(5))
-                .WithMessage("Transaction date cannot be in the future.");
+           
         }
     }
 }

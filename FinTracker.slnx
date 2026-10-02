@@ -37,10 +37,7 @@
     <Project Path="Src/Modules/Notification/Notification.Presentation/Notification.Presentation.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/Report/">
-    <Project Path="Src/Modules/Report/Report.Application/Report.Application.csproj" />
-    <Project Path="Src/Modules/Report/Report.Domain/Report.Domain.csproj" />
-    <Project Path="Src/Modules/Report/Report.Infrastructure/Report.Infrastructure.csproj" />
-    <Project Path="Src/Modules/Report/Report.Presentation/Report.Presentation.csproj" />
+    <Project Path="Src/Modules/Report/Report.Application/Report.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/Transaction/">
     <Project Path="Src/Modules/Transaction/Transaction.Application/Transaction.Application.csproj" />

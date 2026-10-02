@@ -16,6 +16,5 @@ namespace Transaction.Application.Commands.CreateTransaction
         int CategoryId,
         decimal Amount,
         TransactionType Type,
-        string? Description,
-        DateTime TransactionDate) : IRequest<Result<TransactionDto>>;
+        string? Description) : IRequest<Result<TransactionDto>>;
 }

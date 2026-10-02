@@ -1,6 +1,7 @@
 ﻿using FinTracker.SharedKernel.Domain;
 using FinTracker.SharedKernel.Exceptions;
 using FinTracker.SharedKernel.ValueObjects;
+using System.ComponentModel.DataAnnotations;
 using Wallet.Domain.Entities.Wallet.Events;
 
 namespace Wallet.Domain.Entities.Wallet 
@@ -15,7 +16,10 @@ public class Wallet : AggregateRoot<Guid>
     public DateTime CreatedAt { get; private set; }
     public DateTime? UpdatedAt { get; private set; }
 
-    protected Wallet() : base(Guid.Empty) { }
+    [Timestamp]
+    public byte[] RowVersion { get; private set; } = null!;
+
+        protected Wallet() : base(Guid.Empty) { }
 
     private Wallet(Guid id, string title, Guid userId, string currency) : base(id)
     {
