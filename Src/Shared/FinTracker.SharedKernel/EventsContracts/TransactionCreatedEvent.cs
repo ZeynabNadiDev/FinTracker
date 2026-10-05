@@ -6,6 +6,7 @@ namespace FinTracker.SharedKernel.Events
 {
     public sealed record TransactionCreatedEvent(
         Guid TransactionId,
+        Guid UserId,
         Guid WalletId,
         Guid? DestinationWalletId,
         decimal Amount,
@@ -19,11 +20,13 @@ namespace FinTracker.SharedKernel.Events
     }
 
     public sealed record TransactionDeletedEvent(
-        Guid TransactionId,
-        Guid WalletId,
-        decimal Amount,
-        TransactionType Type
-    ) : IDomainEvent
+    Guid TransactionId,
+    Guid UserId,
+    Guid WalletId,
+    decimal Amount,
+    TransactionType Type,
+    int? CategoryId) : IDomainEvent
+
     {
         public Guid EventId { get; init; } = Guid.NewGuid();
         public DateTime OccurredOn { get; init; } = DateTime.UtcNow;
