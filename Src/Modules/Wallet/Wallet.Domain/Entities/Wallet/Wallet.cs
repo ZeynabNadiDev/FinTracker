@@ -1,4 +1,5 @@
 ﻿using FinTracker.SharedKernel.Domain;
+using FinTracker.SharedKernel.Events;
 using FinTracker.SharedKernel.Exceptions;
 using FinTracker.SharedKernel.ValueObjects;
 using System.ComponentModel.DataAnnotations;
@@ -93,6 +94,36 @@ public class Wallet : AggregateRoot<Guid>
             Balance = new Money(Balance.Amount - amount, Balance.Currency);
             UpdatedAt = DateTime.UtcNow;
         }
+
+        public void TransferTo(Wallet destinationWallet, decimal amount)
+        {
+            if (IsRemoved)
+                throw new DomainException("Cannot transfer from a removed wallet.");
+
+            if (destinationWallet is null)
+                throw new DomainException("Destination wallet cannot be null.");
+
+            if (destinationWallet.IsRemoved)
+                throw new DomainException("Cannot transfer to a removed wallet.");
+
+            if (Id == destinationWallet.Id)
+                throw new DomainException("Cannot transfer money to the same wallet.");
+
+            if (Balance.Currency != destinationWallet.Balance.Currency)
+                throw new DomainException($"Currency mismatch: cannot transfer from {Balance.Currency} to {destinationWallet.Balance.Currency}.");
+
+            // Perform transfer atomically in domain
+            Withdraw(amount);
+            destinationWallet.Deposit(amount);
+
+            UpdatedAt = DateTime.UtcNow;
+
+            // Raise domain event for transfer
+            AddDomainEvent(new WalletTransferredEvent(SourceWalletId: Id,DestinationWalletId: destinationWallet.Id,
+                UserId: UserId,Amount: amount));
+        }
+
+
 
     }
 }

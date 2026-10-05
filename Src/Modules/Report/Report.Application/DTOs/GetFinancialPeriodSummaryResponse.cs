@@ -18,9 +18,9 @@ namespace Report.DTOs
         public IReadOnlyList<string> AiAdviceList { get; init; } = [];
     }
 
-    public sealed record CategoryExpenseDto(int CategoryId, string CategoryName, decimal TotalAmount, decimal PercentageOfTotalExpense);
+    public sealed record CategoryExpenseDto(int? CategoryId, string CategoryName, decimal TotalAmount, decimal PercentageOfTotalExpense);
 
-    public sealed record TopExpenseCategoryDto(int CategoryId, string CategoryName, decimal TotalAmount);
+    public sealed record TopExpenseCategoryDto(int? CategoryId, string CategoryName, decimal TotalAmount);
 
-    public sealed record BudgetAlertDto(int CategoryId, string CategoryName, decimal BudgetLimit, decimal ActualSpent, decimal ExceededAmount);
+    public sealed record BudgetAlertDto(int? CategoryId, string CategoryName, decimal BudgetLimit, decimal ActualSpent, decimal ExceededAmount);
 }

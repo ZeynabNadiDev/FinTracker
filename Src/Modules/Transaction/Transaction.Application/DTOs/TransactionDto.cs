@@ -10,9 +10,10 @@ namespace Transaction.Application.DTOs
         Guid Id,
         Guid UserId,
         Guid WalletId,
-        int CategoryId,
+        int? CategoryId,
         decimal Amount,
         int Type,
         string? Description,
-        DateTime TransactionDate);
+        DateTime TransactionDate,
+        Guid? DestinationWalletId = null);
 }

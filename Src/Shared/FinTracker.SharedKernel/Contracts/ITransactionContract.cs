@@ -1,8 +1,10 @@
-﻿using System;
+﻿using FinTracker.SharedKernel.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace FinTracker.SharedKernel.Contracts
 {
@@ -20,14 +22,10 @@ namespace FinTracker.SharedKernel.Contracts
        Guid Id,
        Guid UserId,
        Guid WalletId,
-       int CategoryId,
+       int? CategoryId,
        decimal Amount,
        TransactionType Type,
        DateTime TransactionDate);
 
-    public enum TransactionType
-    {
-        Income = 1,
-        Expense = 2
-    }
+   
 }

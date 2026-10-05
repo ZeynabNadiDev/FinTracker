@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\FinTracker.SharedKernel\FinTracker.SharedKernel.csproj" />
-    <ProjectReference Include="..\..\Transaction\Transaction.Domain\Transaction.Domain.csproj" />
     <ProjectReference Include="..\Wallet.Domain\Wallet.Domain.csproj" />
   </ItemGroup>
 

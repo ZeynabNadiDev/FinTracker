@@ -1,4 +1,5 @@
 ﻿using FinTracker.SharedKernel.Contracts;
+using FinTracker.SharedKernel.Enums;
 using MediatR;
 using Report.Common.Interfaces;
 using Report.DTOs;
@@ -42,8 +43,16 @@ namespace Report.Queries.GetFinancialPeriodSummary
             var totalIncome = transactions.Where(t => t.Type == TransactionType.Income).Sum(t => t.Amount);
             var totalExpense = transactions.Where(t => t.Type == TransactionType.Expense).Sum(t => t.Amount);
 
-            var expenseTransactions = transactions.Where(t => t.Type == TransactionType.Expense).ToList();
-            var categoryIds = expenseTransactions.Select(t => t.CategoryId).Distinct().ToList();
+            // Filter expense transactions that have a valid CategoryId
+            var expenseTransactions = transactions
+                .Where(t => t.Type == TransactionType.Expense && t.CategoryId.HasValue)
+                .ToList();
+
+            // Extract non-nullable category IDs
+            var categoryIds = expenseTransactions
+                .Select(t => t.CategoryId!.Value)
+                .Distinct()
+                .ToList();
 
             var categoriesTask = _categoryContract.GetCategoriesByIdsAsync(categoryIds, cancellationToken);
             var budgetsTask = _budgetReadService.GetUserBudgetsAsync(
@@ -56,7 +65,7 @@ namespace Report.Queries.GetFinancialPeriodSummary
 
             // Prepare category expenses
             var categoryExpenses = expenseTransactions
-                .GroupBy(t => t.CategoryId)
+                .GroupBy(t => t.CategoryId!.Value)
                 .Select(g => {
                     var catName = categoriesMap.TryGetValue(g.Key, out var cat) ? cat.Name : "Unknown";
                     var spent = g.Sum(t => t.Amount);
@@ -82,11 +91,11 @@ namespace Report.Queries.GetFinancialPeriodSummary
 
             // Generate AI Advice
             var aiAdviceString = await _aiAdvisorService.GenerateFinancialAdviceAsync(
-              totalIncome,
-              totalExpense,
-              new List<CategoryExpenseDto>(),
-              alerts,
-               cancellationToken);
+                totalIncome,
+                totalExpense,
+                categoryExpenses,
+                alerts,
+                cancellationToken);
 
             return new GetFinancialPeriodSummaryResponse
             {
@@ -97,7 +106,7 @@ namespace Report.Queries.GetFinancialPeriodSummary
                 CategoryExpenses = categoryExpenses,
                 TopExpenseCategory = topExpenseDto,
                 BudgetExceededAlerts = alerts,
-                AiAdviceList = new List<string> { aiAdviceString } // Wrapping in list to match your DTO
+                AiAdviceList = new List<string> { aiAdviceString }
             };
         }
     }

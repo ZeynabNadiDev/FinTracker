@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wallet.Application.Commands.CreateWallet;
 using Wallet.Application.Commands.DeleteWallet;
+using Wallet.Application.Commands.TransferWallet;
 using Wallet.Application.Commands.UpdateWallet;
 using Wallet.Application.DTO;
 using Wallet.Application.Queries.GetWalletsByUserId;
@@ -68,6 +69,25 @@ namespace Wallet.Presentation.Controllers
             return result.IsSuccess ? Ok() : BadRequest(result.Error);
         }
 
+        [HttpPost("transfer")]
+        [SwaggerOperation(
+          Summary = "Transfer funds between wallets",
+          Description = "Transfers money from a source wallet to a destination wallet for the authenticated user.")]
+        public async Task<IActionResult> Transfer([FromBody] TransferWalletRequest request, CancellationToken cancellationToken)
+        {
+            var userId = GetCurrentUserId();
+            var command = new TransferWalletCommand(
+                request.SourceWalletId,
+                request.DestinationWalletId,
+                request.Amount,
+                userId
+            );
+
+            await _sender.Send(command, cancellationToken);
+
+            return Ok(new { message = "Transfer completed successfully." });
+        }
+
         [HttpDelete("{id:guid}")]
         [SwaggerOperation(
         Summary = "Delete wallet",
@@ -81,10 +101,12 @@ namespace Wallet.Presentation.Controllers
             return result.IsSuccess ? Ok() : BadRequest(result.Error);
         }
 
+
         private Guid GetCurrentUserId()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return Guid.TryParse(userIdClaim, out var userId) ? userId : Guid.Empty;
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FinTracker.SharedKernel.Contracts;
+using FinTracker.SharedKernel.Events;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +21,13 @@ namespace Transaction.Composition
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            // 1. Application Layer
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateTransactionCommand).Assembly));
+            // 1. Application Layer (MediatR & Validators)
+            services.AddMediatR(cfg =>
+            {
+                // Register all Handlers & NotificationHandlers in Transaction.Application
+                cfg.RegisterServicesFromAssembly(typeof(CreateTransactionCommand).Assembly);
+            });
+
             services.AddValidatorsFromAssemblyContaining<CreateTransactionCommand>();
 
             // 2. Infrastructure Layer
@@ -30,7 +36,7 @@ namespace Transaction.Composition
             services.AddDbContext<TransactionDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            // Registering UnitOfWork: Assuming TransactionDbContext implements IUnitOfWork
+            // Registering UnitOfWork & Repositories
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ITransactionContract, TransactionContract>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();

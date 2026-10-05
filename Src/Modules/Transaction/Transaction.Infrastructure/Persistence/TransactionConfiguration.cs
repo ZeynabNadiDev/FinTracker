@@ -22,7 +22,11 @@ namespace Transaction.Infrastructure.Persistence
                 .IsRequired();
 
             builder.Property(t => t.CategoryId)
-                .IsRequired();
+                .IsRequired(false);
+
+            // DestinationWalletId is optional (only set for transfers)
+            builder.Property(t => t.DestinationWalletId)
+                .IsRequired(false);
 
             builder.Property(t => t.Amount)
                 .HasPrecision(18, 2)

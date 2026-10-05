@@ -1,5 +1,5 @@
 ﻿
-using Transaction.Domain.Enums;
+using FinTracker.SharedKernel.Enums;
 
 namespace Transaction.Application.DTOs
 {

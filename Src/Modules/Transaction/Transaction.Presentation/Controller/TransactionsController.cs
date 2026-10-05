@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FinTracker.SharedKernel.Enums;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -16,7 +17,7 @@ using Transaction.Application.Queries.GetTransactionById;
 using Transaction.Application.Queries.GetTransactions;
 using Transaction.Application.Queries.GetTransactionsByUserId;
 using Transaction.Application.Queries.GetTransactionsByWalletId;
-using Transaction.Domain.Enums;
+
 
 namespace Transaction.Presentation.Controller
 {
