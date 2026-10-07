@@ -99,6 +99,7 @@ namespace Transaction.Domain.Entities.Transaction
             // Pass primitive properties instead of passing the entire entity instance
             transaction.AddDomainEvent(new TransactionCreatedEvent(
                 transaction.Id,
+                transaction.UserId,
                 transaction.WalletId,
                 null,
                 transaction.Amount,
@@ -132,6 +133,7 @@ namespace Transaction.Domain.Entities.Transaction
             // Pass primitive properties for transfer event
             transaction.AddDomainEvent(new TransactionCreatedEvent(
                 transaction.Id,
+                transaction.UserId,
                 transaction.WalletId,
                 transaction.DestinationWalletId,
                 transaction.Amount,
@@ -153,9 +155,11 @@ namespace Transaction.Domain.Entities.Transaction
             // Pass primitive properties for deleted event
             AddDomainEvent(new TransactionDeletedEvent(
                 Id,
+                UserId,
                 WalletId,
                 Amount,
-                Type
+                Type,
+                CategoryId
             ));
 
             return Version;

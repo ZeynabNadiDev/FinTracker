@@ -42,7 +42,8 @@ namespace Transaction.Application.Queries.GetTransactions.Handler
                 t.Amount,
                 (int)t.Type,
                 t.Description,
-                t.TransactionDate
+                t.TransactionDate,
+                t.DestinationWalletId
                  )).ToList();
 
             var pagedResult = new PagedResult<TransactionDto>(dtos, totalCount, request.PageNumber, request.PageSize);

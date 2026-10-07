@@ -42,7 +42,7 @@ namespace Transaction.Infrastructure.Persistence.Repositories
         public async Task<IReadOnlyList<TransactionEntity>> GetByWalletIdAsync(Guid walletId, CancellationToken cancellationToken = default)
         {
             return await _context.Transactions
-                .Where(t => t.WalletId == walletId && !t.IsRemoved)
+                .Where(t => (t.WalletId == walletId || t.DestinationWalletId == walletId) && !t.IsRemoved)
                 .OrderByDescending(t => t.TransactionDate)
                 .ToListAsync(cancellationToken);
         }
@@ -62,7 +62,7 @@ namespace Transaction.Infrastructure.Persistence.Repositories
                 .Where(t => t.UserId == userId && !t.IsRemoved);
 
             if (walletId.HasValue)
-                query = query.Where(t => t.WalletId == walletId.Value);
+                query = query.Where(t => t.WalletId == walletId.Value || t.DestinationWalletId == walletId.Value);
 
             if (categoryId.HasValue)
                 query = query.Where(t => t.CategoryId == categoryId.Value);

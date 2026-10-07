@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Budget.Domain.UOW
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork:IDisposable
     {
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

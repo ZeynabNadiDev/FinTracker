@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Identity.Domain.UnitOfWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork:IDisposable
     {
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

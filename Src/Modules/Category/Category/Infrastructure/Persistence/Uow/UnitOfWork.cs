@@ -21,5 +21,26 @@ namespace Category.Infrastructure.Persistence.Uow
         {
             return await _context.SaveChangesAsync(cancellationToken);
         }
+        private bool _disposed;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected  void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+                _disposed = true;
+            }
+        }
+
+
     }
 }

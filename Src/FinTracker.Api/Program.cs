@@ -1,13 +1,14 @@
+using Budget.Composition;
 using Category.Composition;
 using Identity.Composition;
-using Wallet.Composition;
-using Transaction.Composition;
-using Report.Composition;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
+using Notification.Composition;
+using Report.Composition;
 using System.Text;
-using Budget.Composition;
+using Transaction.Composition;
+using Wallet.Composition;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddWalletModule(builder.Configuration);
 builder.Services.AddTransactionModule(builder.Configuration);
 builder.Services.AddBudgetModule(builder.Configuration);
 builder.Services.AddReportModule(builder.Configuration);
+builder.Services.AddNotificationModule(builder.Configuration);
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -42,9 +45,10 @@ builder.Services.AddControllers()
     .AddApplicationPart(typeof(Identity.Presentation.ModuleReference).Assembly)
     .AddApplicationPart(typeof(Category.Presentation.ModuleReference).Assembly)
     .AddApplicationPart(typeof(Wallet.Presentation.ModuleReference).Assembly)
-    .AddApplicationPart(typeof(Transaction.Presentation.Controller.TransactionsController).Assembly) 
+    .AddApplicationPart(typeof(Transaction.Presentation.Controller.TransactionsController).Assembly)
     .AddApplicationPart(typeof(Budget.Presentation.Controllers.BudgetsController).Assembly)
-    .AddApplicationPart(typeof(Report.Presentation.ModuleReference).Assembly);
+    .AddApplicationPart(typeof(Report.Presentation.ModuleReference).Assembly)
+    .AddApplicationPart(typeof(Notification.Presentation.ModuleReference).Assembly);
 
 
 

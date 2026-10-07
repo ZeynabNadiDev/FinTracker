@@ -35,7 +35,8 @@ namespace Transaction.Application.Queries.GetTransactionsByWalletId.Handler
                     t.Amount,
                    (int)t.Type,
                     t.Description,
-                    t.TransactionDate
+                    t.TransactionDate,
+                    t.DestinationWalletId
                 ))
                 .ToList();
 

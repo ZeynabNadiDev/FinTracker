@@ -72,7 +72,8 @@ namespace Transaction.Application.Commands.CreateTransaction.Handler
                 transaction.Amount,
                 (int)transaction.Type,
                 transaction.Description,
-                transaction.TransactionDate);
+                transaction.TransactionDate,
+                 transaction.DestinationWalletId);
 
             return Result<TransactionDto>.Success(transactionDto);
         }

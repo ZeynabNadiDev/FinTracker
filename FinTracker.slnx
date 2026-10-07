@@ -32,6 +32,7 @@
   </Folder>
   <Folder Name="/Src/Modules/Notification/">
     <Project Path="Src/Modules/Notification/Notification.Application/Notification.Application.csproj" />
+    <Project Path="Src/Modules/Notification/Notification.Composition/Notification.Composition.csproj" Id="ee910c65-bb96-42c1-899a-99e3818603f9" />
     <Project Path="Src/Modules/Notification/Notification.Domain/Notification.Domain.csproj" />
     <Project Path="Src/Modules/Notification/Notification.Infrastructure/Notification.Infrastructure.csproj" />
     <Project Path="Src/Modules/Notification/Notification.Presentation/Notification.Presentation.csproj" />

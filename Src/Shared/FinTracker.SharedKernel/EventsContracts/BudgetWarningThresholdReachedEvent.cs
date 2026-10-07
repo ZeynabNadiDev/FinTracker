@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace FinTracker.SharedKernel.EventsContracts
 {
     public sealed record BudgetWarningThresholdReachedEvent(
