@@ -1,3 +1,4 @@
+[![FinTracker CI](https://github.com/ZeynabNadiDev/FinTracker/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeynabNadiDev/FinTracker/actions/workflows/ci.yml)
 # 💰 FinTracker
 
 A modern Personal Finance Management system built with .NET.
