@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Wallet.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRowVersionToWallet : Migration
+    public partial class Initial_Wallet_Module : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -12,14 +12,15 @@ using Wallet.Infrastructure.Persistence.DBcontext;
 namespace Wallet.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(WalletDbContext))]
-    [Migration("20260918164751_Add_Money_ValueObject_To_Wallet")]
-    partial class Add_Money_ValueObject_To_Wallet
+    [Migration("20261009114548_Initial_Wallet_Module")]
+    partial class Initial_Wallet_Module
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("wallet")
                 .HasAnnotation("ProductVersion", "8.0.30")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -36,6 +37,12 @@ namespace Wallet.Infrastructure.Persistence.Migrations
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<string>("Title")
                         .IsRequired()

@@ -1,17 +1,30 @@
 using Budget.Composition;
+using Budget.Infrastructure.Persistence;
+using Budget.Infrastructure.Persistence.DBcontext;
 using Category.Composition;
+using Category.Infrastructure.Persistence;
+using Category.Infrastructure.Persistence.DBcontext;
 using Identity.Composition;
+using Identity.Infrastructure.Persistence;
+using Identity.Infrastructure.Persistence.DBcontext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Notification.Composition;
+using Notification.Infrastructure.Persistence.DBcontext;
 using Report.Composition;
 using System.Text;
 using Transaction.Composition;
+using Transaction.Infrastructure.Persistence;
+using Transaction.Infrastructure.Persistence.DBcontext;
 using Wallet.Composition;
+using Wallet.Infrastructure.Persistence;
+using Wallet.Infrastructure.Persistence.DBcontext;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Module Registrations
 builder.Services.AddIdentityModule(builder.Configuration);
 builder.Services.AddCategoryModule(builder.Configuration);
 builder.Services.AddWalletModule(builder.Configuration);
@@ -20,7 +33,7 @@ builder.Services.AddBudgetModule(builder.Configuration);
 builder.Services.AddReportModule(builder.Configuration);
 builder.Services.AddNotificationModule(builder.Configuration);
 
-
+// Authentication Setup
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -50,8 +63,6 @@ builder.Services.AddControllers()
     .AddApplicationPart(typeof(Report.Presentation.ModuleReference).Assembly)
     .AddApplicationPart(typeof(Notification.Presentation.ModuleReference).Assembly);
 
-
-
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
@@ -79,6 +90,51 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+// Apply pending migrations for all modules
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
+
+    void MigrateContext<TContext>(string moduleName) where TContext : DbContext
+    {
+        try
+        {
+            var db = services.GetRequiredService<TContext>();
+            var pendingMigrations = db.Database.GetPendingMigrations().ToList();
+            if (pendingMigrations.Any())
+            {
+                logger.LogInformation("Applying {Count} pending migrations for {Module}...", pendingMigrations.Count, moduleName);
+                db.Database.Migrate();
+                logger.LogInformation("Successfully migrated {Module}.", moduleName);
+            }
+            else
+            {
+                logger.LogInformation("No pending migrations for {Module}.", moduleName);
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to apply migrations for {Module}.", moduleName);
+            throw;
+        }
+    }
+
+    try
+    {
+        MigrateContext<IdentityDbContext>("Identity");
+        MigrateContext<CategoryDbContext>("Category");
+        MigrateContext<WalletDbContext>("Wallet");
+        MigrateContext<TransactionDbContext>("Transaction");
+        MigrateContext<BudgetDbContext>("Budget");
+        MigrateContext<NotificationDbContext>("Notification");
+    }
+    catch (Exception ex)
+    {
+        logger.LogCritical(ex, "Fatal error during database initialization.");
+    }
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -89,10 +145,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

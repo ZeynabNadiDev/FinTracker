@@ -23,6 +23,7 @@ namespace Wallet.Infrastructure.Persistence.DBcontext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema("wallet");
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(WalletDbContext).Assembly);
         }
 

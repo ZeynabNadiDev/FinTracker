@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Docker/">
+    <File Path="docker-compose.yml" />
+  </Folder>
   <Folder Name="/docs/" />
   <Folder Name="/docs/adr/">
     <File Path="docs/adr/ADR-001-Why-Modular-Monolith.md" />
@@ -57,5 +60,12 @@
   <Folder Name="/Src/Shared/">
     <Project Path="Src/Shared/FinTracker.SharedKernel/FinTracker.SharedKernel.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="test/Budget.Domain.UnitTests/Budget.Domain.UnitTests.csproj" Id="15754b2c-f6ff-45ad-897e-aeea7127ae54" />
+    <Project Path="test/Category.Domain.UnitTests/Category.Domain.UnitTests.csproj" Id="26fc73e5-1f8e-4279-93af-9dae0b7082c7" />
+    <Project Path="test/Identity.Domain.UnitTests/Identity.Domain.UnitTests.csproj" Id="832f348a-7a37-4bc4-ab9c-80547ade33e1" />
+    <Project Path="test/Notification.Domain.UnitTests/Notification.Domain.UnitTests.csproj" Id="900d4a5d-e1b4-42e0-be31-fb9827e2731a" />
+    <Project Path="test/Transaction.Domain.UnitTests/Transaction.Domain.UnitTests.csproj" Id="3d2203c8-6283-43dc-a3b9-3fdff746ecec" />
+    <Project Path="test/Wallet.Domain.UnitTests/Wallet.Domain.UnitTests.csproj" Id="25d77c93-d0f1-4865-9cf8-6d8306b0d3f7" />
+  </Folder>
 </Solution>
