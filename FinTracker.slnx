@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Docker/">
+    <File Path="docker-compose.yml" />
+  </Folder>
   <Folder Name="/docs/" />
   <Folder Name="/docs/adr/">
     <File Path="docs/adr/ADR-001-Why-Modular-Monolith.md" />
@@ -15,42 +18,41 @@
   <Folder Name="/Src/Modules/" />
   <Folder Name="/Src/Modules/Budget/">
     <Project Path="Src/Modules/Budget/Budget.Application/Budget.Application.csproj" />
+    <Project Path="Src/Modules/Budget/Budget.Composition/Budget.Composition.csproj" Id="c1108c8b-5c04-47cf-b7ca-fe6b44849515" />
     <Project Path="Src/Modules/Budget/Budget.Domain/Budget.Domain.csproj" />
     <Project Path="Src/Modules/Budget/Budget.Infrastructure/Budget.Infrastructure.csproj" />
     <Project Path="Src/Modules/Budget/Budget.Presentation/Budget.Presentation.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/Category/">
-    <Project Path="Src/Modules/Category/Category.Application/Category.Application.csproj" />
-    <Project Path="Src/Modules/Category/Category.Domain/Category.Domain.csproj" />
-    <Project Path="Src/Modules/Category/Category.Infrastructure/Category.Infrastructure.csproj" />
-    <Project Path="Src/Modules/Category/Category.Presentation/Category.Presentation.csproj" />
+    <Project Path="Src/Modules/Category/Category/Category.csproj" Id="900ad30a-a5c6-4f81-b8d2-a8af4ed63a27" />
   </Folder>
   <Folder Name="/Src/Modules/Identity/">
     <Project Path="Src/Modules/Identity/Identity.Application/Identity.Application.csproj" />
+    <Project Path="Src/Modules/Identity/Identity.Composition/Identity.Composition.csproj" Id="c9781662-4385-4bf8-8ff5-8fa669602a6d" />
     <Project Path="Src/Modules/Identity/Identity.Domain/Identity.Domain.csproj" />
     <Project Path="Src/Modules/Identity/Identity.Infrastructure/Identity.Infrastructure.csproj" />
     <Project Path="Src/Modules/Identity/Identity.Presentation/Identity.Presentation.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/Notification/">
     <Project Path="Src/Modules/Notification/Notification.Application/Notification.Application.csproj" />
+    <Project Path="Src/Modules/Notification/Notification.Composition/Notification.Composition.csproj" Id="ee910c65-bb96-42c1-899a-99e3818603f9" />
     <Project Path="Src/Modules/Notification/Notification.Domain/Notification.Domain.csproj" />
     <Project Path="Src/Modules/Notification/Notification.Infrastructure/Notification.Infrastructure.csproj" />
     <Project Path="Src/Modules/Notification/Notification.Presentation/Notification.Presentation.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/Report/">
-    <Project Path="Src/Modules/Report/Report.Application/Report.Application.csproj" />
-    <Project Path="Src/Modules/Report/Report.Domain/Report.Domain.csproj" />
-    <Project Path="Src/Modules/Report/Report.Infrastructure/Report.Infrastructure.csproj" />
-    <Project Path="Src/Modules/Report/Report.Presentation/Report.Presentation.csproj" />
+    <Project Path="Src/Modules/Report/Report.Application/Report.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/Transaction/">
     <Project Path="Src/Modules/Transaction/Transaction.Application/Transaction.Application.csproj" />
+    <Project Path="Src/Modules/Transaction/Transaction.Composition/Transaction.Composition.csproj" Id="f74fb9eb-d8de-401e-ab95-238de1e27cf7" />
     <Project Path="Src/Modules/Transaction/Transaction.Domain/Transaction.Domain.csproj" />
     <Project Path="Src/Modules/Transaction/Transaction.Infrastructure/Transaction.Infrastructure.csproj" />
     <Project Path="Src/Modules/Transaction/Transaction.Presentation/Transaction.Presentation.csproj" />
   </Folder>
   <Folder Name="/Src/Modules/Wallet/">
     <Project Path="Src/Modules/Wallet/Wallet.Application/Wallet.Application.csproj" />
+    <Project Path="Src/Modules/Wallet/Wallet.Composition/Wallet.Composition.csproj" Id="3f734459-743f-4f91-a09d-23f18d55c522" />
     <Project Path="Src/Modules/Wallet/Wallet.Domain/Wallet.Domain.csproj" />
     <Project Path="Src/Modules/Wallet/Wallet.Infrastructure/Wallet.Infrastructure.csproj" />
     <Project Path="Src/Modules/Wallet/Wallet.Presentation/Wallet.Presentation.csproj" />
@@ -58,5 +60,12 @@
   <Folder Name="/Src/Shared/">
     <Project Path="Src/Shared/FinTracker.SharedKernel/FinTracker.SharedKernel.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="test/Budget.Domain.UnitTests/Budget.Domain.UnitTests.csproj" Id="15754b2c-f6ff-45ad-897e-aeea7127ae54" />
+    <Project Path="test/Category.Domain.UnitTests/Category.Domain.UnitTests.csproj" Id="26fc73e5-1f8e-4279-93af-9dae0b7082c7" />
+    <Project Path="test/Identity.Domain.UnitTests/Identity.Domain.UnitTests.csproj" Id="832f348a-7a37-4bc4-ab9c-80547ade33e1" />
+    <Project Path="test/Notification.Domain.UnitTests/Notification.Domain.UnitTests.csproj" Id="900d4a5d-e1b4-42e0-be31-fb9827e2731a" />
+    <Project Path="test/Transaction.Domain.UnitTests/Transaction.Domain.UnitTests.csproj" Id="3d2203c8-6283-43dc-a3b9-3fdff746ecec" />
+    <Project Path="test/Wallet.Domain.UnitTests/Wallet.Domain.UnitTests.csproj" Id="25d77c93-d0f1-4865-9cf8-6d8306b0d3f7" />
+  </Folder>
 </Solution>

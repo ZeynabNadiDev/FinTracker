@@ -4,10 +4,38 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>1315ca31-d636-4d47-85d8-37a184143ea6</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.30" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.30">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\Budget\Budget.Composition\Budget.Composition.csproj" />
+    <ProjectReference Include="..\Modules\Budget\Budget.Presentation\Budget.Presentation.csproj" />
+    <ProjectReference Include="..\Modules\Category\Category\Category.csproj" />
+    <ProjectReference Include="..\Modules\Identity\Identity.Composition\Identity.Composition.csproj" />
+    <ProjectReference Include="..\Modules\Identity\Identity.Presentation\Identity.Presentation.csproj" />
+    <ProjectReference Include="..\Modules\Notification\Notification.Composition\Notification.Composition.csproj" />
+    <ProjectReference Include="..\Modules\Notification\Notification.Presentation\Notification.Presentation.csproj" />
+    <ProjectReference Include="..\Modules\Report\Report.Application\Report.csproj" />
+    <ProjectReference Include="..\Modules\Transaction\Transaction.Composition\Transaction.Composition.csproj" />
+    <ProjectReference Include="..\Modules\Transaction\Transaction.Presentation\Transaction.Presentation.csproj" />
+    <ProjectReference Include="..\Modules\Wallet\Wallet.Composition\Wallet.Composition.csproj" />
+    <ProjectReference Include="..\Modules\Wallet\Wallet.Presentation\Wallet.Presentation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

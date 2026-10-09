@@ -17,7 +17,7 @@ namespace FinTracker.SharedKernel.Results
             IsSuccess = isSuccess;
             Error = error;
         }
-        public static Result Succcess() => new Result(true, null);
+        public static Result Success() => new Result(true, null);
 
         public static Result Failure(string error) => new Result(false, error);
 
@@ -31,7 +31,7 @@ namespace FinTracker.SharedKernel.Results
         {
             Value = value;
         }
-        public static Result<T> Succcess(T value) => new Result<T>(true, null, value);
+        public static Result<T> Success(T value) => new Result<T>(true, null, value);
         public static new Result<T> Failure(string error) => new Result<T>(false, error, default);
     }
 }
