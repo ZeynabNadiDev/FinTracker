@@ -1,8 +1,6 @@
 [![FinTracker CI](https://github.com/ZeynabNadiDev/FinTracker/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeynabNadiDev/FinTracker/actions/workflows/ci.yml)
 # 💰 FinTracker
 
-[![FinTracker CI](YOUR_GITHUB_ACTIONS_BADGE_URL)](YOUR_GITHUB_ACTIONS_WORKFLOW_URL)
-
 FinTracker is a personal finance management application built with .NET. It helps individuals organize their wallets, record income and expenses, manage budgets, and review their financial activity through reports and notifications.
 
 The project follows **Modular Monolith** architecture and **Clean Architecture** principles to maintain clear module boundaries and support long-term maintainability.
